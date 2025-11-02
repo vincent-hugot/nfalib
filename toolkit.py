@@ -86,6 +86,12 @@ def base_case_gen(g,b):
         return chain([i],gi)
     except StopIteration: return iter([b])
 
+def monkey_patch(obj, name, value):
+    """Add an attribute / method to a class,
+    but only if not already taken"""
+    assert not hasattr(obj, name)
+    setattr(obj, name, value)
+
 if __debug__:
     __g = fresh_gen((1, 3, 5))
     assert [next(__g) for _ in range(5)] == [0, 2, 4, 6, 7]
